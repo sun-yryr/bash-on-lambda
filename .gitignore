@@ -1,0 +1,4 @@
+# 成果物なので抜く
+.aws-sam
+# 設定なので抜く
+samconfig.toml

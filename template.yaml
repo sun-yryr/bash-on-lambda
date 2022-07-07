@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 3
+
+Parameters:
+  ENV:
+    Type: String
+
+Resources:
+  BashFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${ENV}-bash-function"
+      Handler: main.handler
+      Runtime: provided
+      CodeUri: "./"
+      Layers:
+        - !Ref BashLayer
+  BashLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${ENV}-bash-layer"
+      ContentUri: "./"
+    Metadata:
+      BuildMethod: makefile
